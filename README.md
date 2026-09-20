@@ -473,7 +473,14 @@ SAPI 侧可选输出目标（2026-09-18 实测，共 5 个）：
 
 ## 许可
 
-代码以 **MIT** 许可发布。`dressing_core.py` 是
-[dressing-advice](https://github.com/xiaoming130/dressing-advice)（MIT）的镜像副本，
-用于保证「念出来的话」和「穿衣窗口显示的字」同源一致；
-穿衣规则与天气抓取的著作权归上游。
+本项目以 **MIT** 许可发布，全文见 [LICENSE](LICENSE)。
+
+**第三方代码说明**：`dressing_core.py` 是
+[dressing-advice](https://github.com/xiaoming130/dressing-advice)（同样 MIT）的
+**镜像副本**，原封不动搬运过来，用于保证「念出来的话」和桌面「穿衣建议」窗口
+显示的字**同源一致**、不会各说各话。该文件的穿衣规则（`OUTFITS` 温度区间表）
+与 `wttr.in` 天气抓取逻辑，著作权归上游项目所有；本仓库只做引用，不主张权利。
+
+> 之所以不在 `dressing_core.py` 里直接改东西（比如补一个中文天气词表），
+> 就是为了让它始终能和上游**逐行对得上**，将来上游更新可以直接重新同步覆盖。
+> 需要打补丁的地方一律写在 `dressing_brief.py` 这一层。

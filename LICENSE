@@ -19,13 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-NOTE ON THIRD-PARTY CODE
-------------------------
-`dressing_core.py` is a mirror copy of the clothing-advice logic from
-https://github.com/xiaoming130/dressing-advice (also released under the MIT
-License), vendored here so that the spoken briefing and the desktop
-"穿衣建议" window always show the same data. Copyright for the clothing
-rules and the weather-fetch logic belongs to that upstream project.
