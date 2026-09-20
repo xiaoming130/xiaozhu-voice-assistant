@@ -1,0 +1,24 @@
+# Windows 语音助手（小助）依赖
+# 安装：python -m venv .venv  然后  .venv\Scripts\pip install -r requirements.txt
+
+# ---- 语音识别（本地离线，不联网、不传云端）----
+faster-whisper>=1.2.1
+
+# ---- 麦克风采集 / 音频计算 ----
+sounddevice>=0.5.6
+numpy>=2.0
+
+# ---- 语音合成：走 Windows 自带 SAPI ----
+# pyttsx3 的 sapi5 驱动底层用 win32com，所以必须有 pywin32
+pyttsx3>=2.99
+pywin32>=306
+
+# ---- Windows 音频端点 / 系统音量控制（volume_ctl.py 用）----
+pycaw>=20240210
+comtypes>=1.4.2
+
+# ---- 唤醒词拼音模糊匹配（「小助」听成「小猪/小竹」也能唤醒）----
+pypinyin>=0.53.0
+
+# ---- 繁简转换（whisper 经常输出繁体）----
+zhconv>=1.4.3

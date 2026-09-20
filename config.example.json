@@ -1,0 +1,54 @@
+{
+  "_使用说明": "复制本文件为 config.json 再改。改完重启助手生效。",
+  "_说明": "mic_device=null 时按 mic_name_keywords 自动查找麦克风。",
+  "_output_device说明": "播报只从这个设备出声。按名字模糊匹配（全名/简写都行，如『耳机』）。留空=跟随系统默认设备；匹配不到也退回默认，会记到 tts.log。设备名用 device_probe.py 查看。",
+  "output_device": "耳机 (Realtek(R) Audio)",
+  "mic_name_keywords": ["麦克风阵列", "Realtek"],
+  "mic_device": null,
+  "wake_words": ["小助", "小助手"],
+  "energy_margin": 2.2,
+  "min_threshold": 0.004,
+  "max_threshold": 0.045,
+  "silence_sec": 0.9,
+  "min_speech_sec": 0.35,
+  "max_record_sec": 15,
+  "followup_sec": 10,
+  "rate": 185,
+  "volume": 1.0,
+  "chime_volume": 0.9,
+  "model": "base",
+  "hotwords": "小助，小助手，现在几点，今天有什么安排，提醒我，专注，取消，有什么提醒，今天天气怎么样，今天热不热，多少度，冷不冷，要穿什么",
+
+  "_dressing_brief说明": "一次性动作：启动桌面穿衣建议 exe + 语音播报。enabled=false 可临时整体关掉。detail=brief 只念温度与搭配。exe 支持 ~ 展开（如 ~/Desktop/穿衣建议.exe）。",
+  "dressing_brief": {
+    "enabled": true,
+    "exe": "~/Desktop/穿衣建议.exe",
+    "city": "临沂",
+    "window_title": "穿衣建议",
+    "launch_exe": true,
+    "close_window": true,
+    "detail": "full"
+  },
+
+  "_headphone_watch说明": "可选：『插入耳机』时触发。⚠️ 若耳机一直插在电脑上，设备从开机起就常驻在场，『不在场→在场』的边沿永远不会发生，本监听器等于不会触发 —— 这种情况请用下面的 dressing_boot。fire_on_start 保持 false，避免和开机播报重复。",
+  "headphone_watch": {
+    "enabled": true,
+    "must_include": ["耳机", "Realtek"],
+    "poll_sec": 5,
+    "cooldown_sec": 120,
+    "fire_on_start": false
+  },
+
+  "_dressing_boot说明": "打开 WorkBuddy 后播一次穿衣建议。由启动文件夹的 .bat 拉起，跑完即退，不需要常驻进程。trigger=workbuddy 时等 WorkBuddy.exe 进程出现再播（wb_required=true 表示等不到就不播）；trigger=boot 回到「登录后直接播」。delay_sec=先静默等多久；wb_timeout_sec=最长等 WorkBuddy 多久；network_timeout_sec=最长等网络多久；device_timeout_sec=最长等音频设备多久。enabled=false 可整体关掉。",
+  "dressing_boot": {
+    "enabled": true,
+    "trigger": "workbuddy",
+    "wb_timeout_sec": 300,
+    "wb_required": true,
+    "wb_image": "WorkBuddy.exe",
+    "delay_sec": 5,
+    "network_timeout_sec": 120,
+    "device_timeout_sec": 45,
+    "probe_sec": 3
+  }
+}
