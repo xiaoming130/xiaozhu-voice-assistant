@@ -132,6 +132,12 @@ def _tone(freq, dur, amp=0.7, decay=7.0):
 
     amp 原来是 0.35 —— 峰值只有满量程的 1/3，听感偏小（萌哥反馈过）。
     提到 0.7 后响度约 +6dB，仍留足余量不削波（synth 里还有 0.9 的兜底）。
+
+    ⚠️ 淡出是必须的，别删：指数衰减 decay=7 在短音符上根本来不及归零 ——
+    0.11s 的音符结束时包络还有 exp(-7*0.11)=0.46（46% 幅度），
+    直接跳到后面的静音间隔就是一声「咔」。
+    2026-09-20 修：原来只有淡入没有淡出，docstring 写了「首尾」但代码只做了一半；
+    amp 从 0.35 提到 0.7 后这个咔哒声也跟着翻倍了。
     """
     n = max(int(FS * dur), 1)
     t = np.arange(n) / FS
@@ -139,6 +145,8 @@ def _tone(freq, dur, amp=0.7, decay=7.0):
     env = np.exp(-decay * t)
     n_in = max(int(FS * 0.004), 1)
     env[:n_in] *= np.linspace(0.0, 1.0, n_in)
+    n_out = max(int(FS * 0.006), 1)          # 淡出，让音符必然收到 0
+    env[-n_out:] *= np.linspace(1.0, 0.0, n_out)
     return (amp * wave * env).astype(np.float32)
 
 
